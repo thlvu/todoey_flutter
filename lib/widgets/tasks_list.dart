@@ -13,6 +13,7 @@ class TasksList extends StatelessWidget {
           return TaskTile(
             task: task,
             toggleTaskState: (bool _) => taskData.updateTask(task),
+            longPressCallback: () => taskData.deleteTask(task),
           );
         },
         itemCount: taskData.tasksCount,

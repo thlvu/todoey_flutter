@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:todoey_flutter/models/task.dart';
-import 'package:todoey_flutter/widgets/task_data.dart';
 
 class TaskTile extends StatelessWidget {
   final Task task;
   final void Function(bool) toggleTaskState;
+  final void Function() longPressCallback;
 
-  TaskTile({this.task, this.toggleTaskState});
+  TaskTile({this.task, this.toggleTaskState, this.longPressCallback});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: GestureDetector(
-        child: Text(
-          task.taskTitle,
-          style: TextStyle(
-              decoration: task.isDone ? TextDecoration.lineThrough : null),
-        ),
-        onLongPress: () =>
-            Provider.of<TaskData>(context, listen: false).deleteTask(task),
+      onLongPress: longPressCallback,
+      title: Text(
+        task.taskTitle,
+        style: TextStyle(
+            decoration: task.isDone ? TextDecoration.lineThrough : null),
       ),
       trailing: Checkbox(
         value: task.isDone,
