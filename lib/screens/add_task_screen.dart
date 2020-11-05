@@ -41,7 +41,7 @@ class AddTaskScreen extends StatelessWidget {
                 onPressed: () {
                   if (newTaskTitle != null) {
                     Provider.of<TaskData>(context, listen: false)
-                        .addTask(newTaskTitle);
+                        .addTaskByTitle(newTaskTitle);
                     Navigator.pop(context);
                   }
                 },

@@ -7,12 +7,14 @@ class TasksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskData>(
-      builder: (context, taskData, child) =>
-      ListView.builder(
-        itemBuilder: (context, index) => TaskTile(
-          taskTitle: taskData.tasks[index].taskTitle,
-          isDone: taskData.tasks[index].isDone,
-        ),
+      builder: (context, taskData, child) => ListView.builder(
+        itemBuilder: (context, index) {
+          final task = taskData.tasks[index];
+          return TaskTile(
+            task: task,
+            toggleTaskState: (bool _) => taskData.updateTask(task),
+          );
+        },
         itemCount: taskData.tasksCount,
       ),
     );
